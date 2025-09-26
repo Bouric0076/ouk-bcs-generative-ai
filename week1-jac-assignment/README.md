@@ -34,5 +34,5 @@ The program consists of:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/week1-jac-assignment.git
+git clone https://github.com/bouric0076/week1-jac-assignment.git
 cd week1-jac-assignment
