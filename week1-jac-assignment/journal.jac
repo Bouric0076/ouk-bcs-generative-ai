@@ -128,16 +128,15 @@ def load_data_from_file(root_node: any) -> tuple {
         k = 0;
         while k < len(es) {
             entry_data = es[k];
-            entry = root_node ++> journal_entry(
-                entry_data.get("mood", ""),
-                entry_data.get("mood_score", 5),
-                entry_data.get("note", ""),
-                entry_data.get("response", ""),
-                entry_data.get("timestamp", ""),
-                entry_data.get("tags", []),
-                entry_data.get("energy_level", 5),
-                entry_data.get("gratitude", "")
-            );
+            # Create journal entry node and set attributes
+            entry = journal_entry(mood=entry_data.get("mood", ""));
+            entry.mood_score = entry_data.get("mood_score", 5);
+            entry.note = entry_data.get("note", "");
+            entry.response = entry_data.get("response", "");
+            entry.timestamp = entry_data.get("timestamp", "");
+            entry.tags = entry_data.get("tags", []);
+            entry.energy_level = entry_data.get("energy_level", 5);
+            entry.gratitude = entry_data.get("gratitude", "");
             entries.append(entry);
             k = k + 1;
         }
@@ -272,16 +271,15 @@ impl JournalWalker.act {
         ts = datetime.datetime.now().isoformat();
         mood_score = get_mood_score(self.mood);
 
-        new_entry = root ++> journal_entry(
-            mood=self.mood, 
-            mood_score=mood_score, 
-            note=self.note, 
-            response="", 
-            timestamp=ts, 
-            tags=tags, 
-            energy_level=energy_level, 
-            gratitude=gratitude_input
-        );
+        # Create a new journal entry node
+        new_entry = journal_entry(mood=self.mood);
+        new_entry.mood_score = mood_score;
+        new_entry.note = self.note;
+        new_entry.response = "";
+        new_entry.timestamp = ts;
+        new_entry.tags = tags;
+        new_entry.energy_level = energy_level;
+        new_entry.gratitude = gratitude_input;
 
         context = "Mood: " + str(self.mood) + " (score: " + str(mood_score) + "/10), Energy: " + str(energy_level) + "/10";
         if gratitude_input != "" {
